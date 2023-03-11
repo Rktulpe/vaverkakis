@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Document</title>
+
+
+
+<style>
+
+#sticky-div {
+  width: 50px; /* Set the width to 50px */
+  height: 100%;
+  position: fixed; /* Make the div fixed */
+  top: 0; /* Position it at the top of the page */
+  left: 0; /* Position it to the left */
+  z-index: 1; /* Make sure it sits on top of all other content */
+  background: orange;
+  transition: width 0.2s ease-in-out;
+}
+
+
+
+
+#main_body {
+  width: 100%;
+  clear: both;
+  height: 2000px;
+}
+
+
+#toggler {
+
+  display: none;
+  
+
+}
+
+.burger {
+  
+  width: 50px;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  cursor: pointer;
+
+}
+
+
+.bun {
+
+display: block;
+background-color: #fff;
+height: 3px;
+width: 20px;
+transition: translate 0.2s 0.25s, rotate 0.2s;
+
+
+} 
+
+
+#toggler:checked+.burger .bun{
+
+  transition: translate 0.2s, rotate 0.2s 0.25s; 
+
+}
+
+
+
+#toggler:checked+.burger .bun--top{ 
+
+
+  rotate: 45deg;
+  translate: 0 3px;
+
+
+}
+
+
+#toggler:checked+.burger .bun--bottom {
+  
+ display: none;
+  
+  
+   }
+
+
+
+   #toggler:checked+.burger .bun--middle {
+  
+   
+    rotate: -45deg;
+  translate: 0 -3px;
+  
+  
+  
+   }
+
+
+   #sticky-div.expanded {
+  width: 300px; /* Change the width to 300px when the checkbox is checked */
+}
+
+
+
+#menu-items {
+  display: none;
+  transition: display 0.2s ease-in-out;
+
+}
+
+#menu-items li {
+
+  color: white;
+
+
+}
+
+#menu-items.show {
+
+  display: block;
+  
+}
+
+#container {
+  position: absolute;
+  top: 0;
+  right: 0; /* set right property to 0 */
+  width: calc(100% - 50px); /* Subtract the width of the sticky div */
+  height: 100vh;
+  transition: width 0.2s ease-in-out;
+  
+
+}
+
+
+#container.minimize {
+
+
+  width: calc(100% - 300px);
+  
+
+
+}
+
+
+#container .school {
+
+  width: 100%;
+  height: 100vh;
+  position: relative; 
+
+}
+
+.text-on-image {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  color: #fff; /* Set the text color */
+  padding: 5px; /* Add padding for visibility */
+  color: black;
+  font-size: 20px;
+}
+
+ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			font-family: Arial, sans-serif;
+			font-size: 25px;
+			line-height: 1.5;
+		}
+
+		li {
+			padding: 10px;
+			border-bottom: 1px solid #ccc;
+		}
+
+		li:hover {
+			background-color: #ddd;
+		}
+
+
+    .main_img {
+  width: 100%;
+  height: 100vh;
+  transition: transform 0.3s ease-out;
+}
+
+
+
+.left {
+    width: 50%;
+    height: 100vh;
+    float: left;
+  }
+
+
+
+  @font-face {
+  font-family: 'vaverfont';
+  src: url('assets/fonts/lerotica-regular.ttf') format('ttf'),
+       url('assets/fonts/lerotica-regular.woff') format('woff');
+}
+
+
+
+.right {
+  font-family: 'vaverfont', sans-serif;
+  width: 50%;
+  float: right;
+  background-color: #fff;
+  text-align: center;
+  display: flex;
+  top: 200px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  float: left;
+  transition: all 0.3s ease;
+
+
+}
+
+
+
+.kakis {
+  font-size: 60px;
+  font-weight: bold;
+  color: darkblue;
+  transition: all 0.3s ease;
+
+}
+
+
+
+.right .text-wrapper {
+  text-align: left;
+  line-height: 1.5;
+}
+
+.right .text-wrapper hr {
+  border-top: 2px solid #999;
+  margin: 10px 0;
+  width: 110%;
+}
+
+.right .text-wrapper .kindergarden {
+  font-size: 18px;
+  color: #000;
+  left: 75%;
+}
+
+
+
+
+
+.logo-img-fixed {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100px;
+  transition: all 0.3s ease;
+
+}
+
+
+.kakis-fixed {
+  position: fixed;
+  top: 0;
+  right: 120px;
+  transition: all 0.3s ease;
+  font-size: 40px;
+  font-weight: bold;
+  color: darkblue;
+
+}
+
+
+#logo-img {
+  transition: all 0.3s ease;
+
+}
+
+
+
+.kindergarden-fixed {
+
+  display: none;
+
+}
+
+
+.main_sep h1 {
+  text-align: center;
+  padding: 70px;
+  border-left: #000 solid 2px;
+  color: darkblue;
+  font-family: 'vaverfont', sans-serif;
+  background-color: orange;
+  margin-top: 0;
+}
+
+
+
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 30px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 50%; color: darkblue;
+}
+.fa:hover {
+    opacity: 0.7;
+}
+
+
+
+
+.kindergarden {
+  float: left;
+}
+
+.social-icons {
+  float: right;
+}
+
+.social-icons a {
+  margin-left: 10px;
+}
+
+
+
+#scroll-down {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  opacity: 1;
+  z-index: 99;
+  transition: opacity 0.3s ease;
+}
+
+#scroll-down a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+#scroll-down p {
+  margin-bottom: 8px;
+}
+#scroll-down:hover {
+  opacity: 0.7;
+}
+
+#scroll-down.hidden {
+  display: none;
+}
+
+
+
+.left-head {
+  width: 50%;
+
+    float: left;
+  }
+
+
+
+</style>
+
+
+</head>
+<body>
+
+  <div id="scroll-down" class="hidden">
+    <a href="#main_body">
+      <p>Scroll down</p>
+      <i class="fa fa-arrow-down"></i>
+    </a>
+  </div>
+  
+<div id="sticky-div">
+    <input type="checkbox" id="toggler">
+    <label for="toggler" class="burger">
+      <div class="bun bun--top"></div>
+      <div class="bun bun--middle"></div>
+      <div class="bun bun--bottom"></div>
+    </label>
+   
+    <div id="menu-items">
+<ul>
+
+<li>Par Mums</li>
+<li>Dienas Režīms</li>
+<li>Pedagogi</li>
+<li>Cenas</li>
+<li>Galerija</li>
+<li>Blogs</li>
+<li>Telpu Noma</li>
+<li>Kontakti</li>
+
+
+
+
+</ul>
+
+
+
+
+    </div>
+
+  </div>
+
+
+
+<div id="container">
+
+
+  <div class="left">
+    <img src="assets/img/main/galven_bilde.jpg" alt="" class="main_img">
+
+
+
+
+  </div>
+
+  <div class="right">
+
+
+    <div class="centered-div">
+      <img id="logo-img" width="50%" src="assets/img/main/logo.png" alt="Logo">
+    </div>
+   
+  <div class="text-wrapper">
+
+    <p class="kakis" id="kakis">VĀVERKAĶIS</p>
+    <hr>
+    <br>
+    <div class="wrap">
+    <p class="kindergarden" id="kindergarden">BĒRNUDĀRZS</p> 
+    <div class="social-icons">
+    <a href="#" class="fa fa-facebook"></a>
+      <a href="#" class="fa fa-instagram"></a>  
+</div>
+      </div>
+
+  </div>
+</div>
+
+
+
+
+
+<div id="main_body">
+  <div class="left-head">
+
+    <div class="main_sep"><h1>Jaunumi un Aktualitātes</h1></div>
+  
+  
+  </div>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+  
+</body>
+
+<script>
+
+
+
+// Get the logo image and the window object
+const windowObj = window;
+
+const logoImg = document.getElementById('logo-img');
+const kakis = document.getElementById('kakis');
+const kindergarden = document.getElementById('kindergarden');
+
+
+
+windowObj.addEventListener('scroll', function() {
+  if (windowObj.scrollY > window.innerHeight * 0.65) {
+    logoImg.classList.add('logo-img-fixed');
+  } else {
+    logoImg.classList.remove('logo-img-fixed');
+  }
+});
+
+windowObj.addEventListener('scroll', function() {
+  if (windowObj.scrollY > window.innerHeight * 0.65) {
+    kakis.classList.add('kakis-fixed');
+    kakis.classList.remove('kakis');
+
+  } else {
+    kakis.classList.remove('kakis-fixed');
+    kakis.classList.add('kakis');
+
+  }
+});
+
+
+windowObj.addEventListener('scroll', function() {
+  if (windowObj.scrollY > window.innerHeight * 0.65) {
+    kindergarden.classList.add('kindergarden-fixed');
+    kindergarden.classList.remove('kindergarden');
+
+  } else {
+    kindergarden.classList.remove('kindergarden-fixed');
+    kindergarden.classList.add('kindergarden');
+
+  }
+});
+
+
+
+
+
+
+
+kindergarden
+
+</script>
+
+
+<script>
+
+$(document).ready(function(){
+  $("#toggler").change(function(){
+    if(this.checked) {
+      $("#sticky-div").addClass("expanded");
+    } else {
+      $("#sticky-div").removeClass("expanded");
+    }
+  });
+});
+
+$(document).ready(function(){
+  $("#toggler").change(function(){
+    if(this.checked) {
+      $("#menu-items").addClass("show");
+    } else {
+      $("#menu-items").removeClass("show");
+    }
+  });
+});
+
+
+$(document).ready(function(){
+  $("#toggler").change(function(){
+    if(this.checked) {
+      $("#container").addClass("minimize");
+    } else {
+      $("#container").removeClass("minimize");
+    }
+  });
+});
+
+
+
+
+</script>
+
+
+</html>
