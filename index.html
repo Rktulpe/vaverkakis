@@ -7,6 +7,7 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>Document</title>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,700,100|Montserrat:400,700|Catamaran:400,100' rel='stylesheet' type='text/css'>
 
 
 
@@ -307,6 +308,7 @@ ul {
   font-family: 'vaverfont', sans-serif;
   background-color: orange;
   margin-top: 0;
+  margin-bottom: 30px;
 }
 
 
@@ -340,37 +342,79 @@ ul {
 
 
 
-#scroll-down {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  opacity: 1;
-  z-index: 99;
-  transition: opacity 0.3s ease;
-}
 
-#scroll-down a {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 24px;
-  text-decoration: none;
-}
+.scroll-down-btn {
+            position: absolute;
+            text-align: center;
+            bottom: 20px;
+            left: 50%;
+            z-index: 999;
+            margin-left: -35px;
+            width: 70px;
+            height: 70px;
+        }
 
-#scroll-down p {
-  margin-bottom: 8px;
-}
-#scroll-down:hover {
-  opacity: 0.7;
-}
+        .scroll-down-btn .arrow {
+            position: absolute;
+            top: 0px;
+            left: 50%;
+            margin-left: -25px;
+            width: 50px;
+            height: 50px;
+            border-style: solid;
+            border-width: thin;
+            border-color: rgba(0, 0, 0, 0) rgb(0, 0, 0) #000 rgba(0, 0, 0, 0);
+            transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            animation: arrow .8s infinite;
+            -webkit-animation: arrow .8s infinite;
+            -moz-animation: arrow .8s infinite;
+            -ms-animation: arrow .8s infinite;
+            -o-animation: arrow .8s infinite;
+        }
 
-#scroll-down.hidden {
-  display: none;
-}
+        .scroll-down-btn .text {
+            position: absolute;
+            top: 0px;
+            left: 50%;
+            margin-left: -33px;
+            color: rgb(0, 0, 0);
+            width: 70px;
+            letter-spacing: 4px;
+            text-align: center;
+            animation: arrow .8s infinite;
+            -webkit-animation: arrow .8s infinite;
+            -moz-animation: arrow .8s infinite;
+            -ms-animation: arrow .8s infinite;
+            -o-animation: arrow .8s infinite;
+        }
 
+        @-webkit-keyframes arrow {
+            0% {top: 0px;}
+            50% {top: 10px;}
+            100% {top: 0px;}
+        }
 
+        @-moz-keyframes arrow {
+            0% {top: 0px;}
+            50% {top: 10px;}
+            100% {top: 0px;}
+        }
+
+        @-ms-keyframes arrow {
+            0% {top: 0px;}
+            50% {top: 10px;}
+            100% {top: 0px;}
+        }
+
+        @-o-keyframes arrow {
+            0% {top: 0px;}
+            50% {top: 10px;}
+            100% {top: 0px;}
+        }
 
 .left-head {
   width: 50%;
@@ -380,14 +424,51 @@ ul {
 
 
 
+  .body {
+    display: flex;
+			flex-direction: row;
+			height: 100vh;
+			margin: 0;
+			padding: 0;
+      width: 100%;
+
+  }
+
+
+  .sidebar {
+			background-color: #f2f2f2;
+			width: 25%;
+			padding: 20px;
+      margin-right: 30px;
+      margin-left: 30px;
+
+		}
+		.calendar {
+			margin-bottom: 20px;
+		}
+		.news {
+			background-color: #f9f9f9;
+			width: 75%;
+      float: left;
+			padding: 20px;
+      margin-left: 30px;
+		}
+    .sidebar.fixed {
+      position: fixed;
+      top: 150px;
+      z-index: 1;
+      right: 0px;
+    }
+
 </style>
 
 
 </head>
 <body>
 
+
+
   <div id="scroll-down" class="hidden">
-    <a href="#main_body">
       <p>Scroll down</p>
       <i class="fa fa-arrow-down"></i>
     </a>
@@ -428,6 +509,45 @@ ul {
 
 
 <div id="container">
+
+  <section id="sec01">
+    <a id="scroll-btn" href="#main_body">
+    <div class="scroll-down-btn">
+        <div class="text">Scroll</div>
+        <div class="arrow"></div>
+    </div>
+    </a>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<script>
+
+
+// get the button element
+var scrollBtn = document.getElementById('scroll-btn');
+
+// add click event listener to the button
+scrollBtn.addEventListener('click', function(e) {
+  // prevent default behavior of clicking a link
+  e.preventDefault();
+  
+  // get the target element's top position
+  var target = document.querySelector(this.getAttribute('href'));
+  var targetTop = target.getBoundingClientRect().top + window.pageYOffset;
+  
+  // animate scrolling to the target element
+  window.scrollTo({
+    top: targetTop,
+    behavior: 'smooth'
+  });
+});
+
+
+
+</script>
+
 
 
   <div class="left">
@@ -473,6 +593,25 @@ ul {
   
   </div>
 
+
+
+
+  <div class="body">
+
+ 
+    <div class="news">
+      <h2>News</h2>
+      <!-- insert news div here -->
+    </div>
+
+    <div id="sidebar" class="sidebar">
+      <div class="calendar">
+        <h2>Calendar</h2>
+        <!-- insert calendar here -->
+      </div>
+    </div>
+  </div>
+
 </div>
 
 
@@ -486,6 +625,29 @@ ul {
 
   
 </body>
+
+
+<script>
+  window.onscroll = function() {
+    var sidebar = document.getElementById("sidebar");
+    var sidebarTop = sidebar.offsetTop;
+    var sidebarHeight = sidebar.offsetHeight;
+    var sidebarBottom = sidebarTop + sidebarHeight;
+
+    if (window.pageYOffset > sidebarTop) {
+      sidebar.classList.add("fixed");
+    } else {
+      sidebar.classList.remove("fixed");
+    }
+
+    // Remove the fixed class as soon as the user scrolls up past the bottom of the sidebar
+    if (window.pageYOffset < sidebarBottom - sidebarHeight) {
+      sidebar.classList.remove("fixed");
+    }
+  }
+</script>
+
+
 
 <script>
 
